@@ -25,7 +25,10 @@ It includes:
 ### Prerequisites
 
 - A Google Cloud project with BigQuery enabled.
-- A configured GTM server-side tagging environment.
+- A BigQuery dataset created in your project.
+- A BigQuery table set up using the table.json file from this gitHub repository.
+- Correct permissions assigned to your provided service account email (BigQuery Write permissions).
+- A properly configured GTM server-side tagging environment.
 
 ### Setup
 

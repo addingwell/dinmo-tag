@@ -252,7 +252,31 @@ function buildRowSlave(rowSlave) {
             key = key.replace("x-ga-", "");
             rowSlave[key] = value;
         } else {
-            if (topDbFields.indexOf(key) !== -1) {
+            if(key === 'user_data' && value) {
+               let userDataValue = value;
+               const typeUserData = getType(value);
+               if(typeUserData === "array") {
+                 userDataValue = value[0];
+               }
+
+               let userParams = {
+                   email_address: userDataValue.sha256_email_address || userDataValue.email_address,
+                   phone_number: userDataValue.sha256_phone_number || userDataValue.phone_number,
+               };
+
+               if(userDataValue.address && getType(userDataValue.address) === "object") {
+                 userParams.first_name = userDataValue.address.sha256_first_name || userDataValue.address.first_name;
+                 userParams.last_name = userDataValue.address.sha256_last_name || userDataValue.address.last_name;
+                 userParams.country = userDataValue.address.country;
+                 userParams.city = userDataValue.address.city;
+                 userParams.region = userDataValue.address.region;
+                 userParams.street = userDataValue.address.street;
+                 userParams.postal_code = userDataValue.address.postal_code;
+               }
+
+               rowSlave.user_params = userParams;
+
+            } else if (topDbFields.indexOf(key) !== -1) {
                 if(key === 'items') {
                     rowSlave.items = getItems(value);
                 } else {

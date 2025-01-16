@@ -1,10 +1,6 @@
-# BigQuery Integration for Google Tag Manager (server-side)
+# Dinmo Tag (Server-side)
 
-The BigQuery Integration Script enables server-side processing and storage of event data from Google Tag Manager. It converts incoming event data into a structured schema, allowing for optimized data collection and storage in BigQuery. This script enhances performance, improves data governance, and facilitates analytics.
-
-## Background
-
-Server-side tagging allows for better control over event tracking and data processing, reducing client-side overhead and improving overall system reliability. By integrating with BigQuery, this solution ensures scalable, robust, and efficient event data storage while providing flexibility to filter, transform, and enrich data before insertion.
+The Dinmo Tag processes incoming GA4 requests and stores the data in BigQuery.
 
 ## How does the script work?
 
@@ -26,13 +22,13 @@ It includes:
 
 - A Google Cloud project with BigQuery enabled.
 - A BigQuery dataset created in your project.
-- A BigQuery table set up using the table.json file from this gitHub repository.
+- A BigQuery table set up using the `table.json` file from this github repository.
 - Correct permissions assigned to your provided service account email (BigQuery Write permissions).
 - A properly configured GTM server-side tagging environment.
 
 ### Setup
 
-1. Add the script to your server-side GTM container.
+1. Add the template.tpl to your server-side GTM container.
 2. Configure the following fields in the script:
    - `bqProjectId`: Your Google Cloud Project ID.
    - `bqDatasetId`: The BigQuery dataset name.
@@ -60,4 +56,4 @@ Encountered an issue or have feedback? Please report bugs via GitHub or contact 
 
 ## Open Source
 
-The BigQuery Integration Script for GTM Server-Side is developed and maintained by [Addingwell](https://www.addingwell.com/) under the Apache 2.0 license.
+The Dinmo tag for GTM Server-Side is developed and maintained by [Addingwell](https://www.addingwell.com/) under the Apache 2.0 license.

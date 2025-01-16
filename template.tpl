@@ -239,6 +239,18 @@ function determinateIsLoggingEnabled() {
     );
 }
 
+function isAlreadyHashed(input){
+  return input && (input.toString().match('^[A-Fa-f0-9]{64}$') != null);
+}
+
+function hashData(input){
+  if(input == null || isAlreadyHashed(input)){
+    return input;
+  }
+
+  return sha256Sync(input.toString().trim().toLowerCase(), {outputEncoding: 'hex'});
+}
+
 function buildRowSlave(rowSlave) {
     for (const rowEntry of Object.entries(rowEventData)) {
         let key = rowEntry[0];
@@ -260,18 +272,18 @@ function buildRowSlave(rowSlave) {
                }
 
                let userParams = {
-                   email_address: userDataValue.sha256_email_address || userDataValue.email_address,
-                   phone_number: userDataValue.sha256_phone_number || userDataValue.phone_number,
+                   email_address: hashData(userDataValue.sha256_email_address || userDataValue.email_address),
+                   phone_number: hashData(userDataValue.sha256_phone_number || userDataValue.phone_number),
                };
 
                if(userDataValue.address && getType(userDataValue.address) === "object") {
-                 userParams.first_name = userDataValue.address.sha256_first_name || userDataValue.address.first_name;
-                 userParams.last_name = userDataValue.address.sha256_last_name || userDataValue.address.last_name;
-                 userParams.country = userDataValue.address.country;
-                 userParams.city = userDataValue.address.city;
-                 userParams.region = userDataValue.address.region;
-                 userParams.street = userDataValue.address.street;
-                 userParams.postal_code = userDataValue.address.postal_code;
+                 userParams.first_name = hashData(userDataValue.address.sha256_first_name || userDataValue.address.first_name);
+                 userParams.last_name = hashData(userDataValue.address.sha256_last_name || userDataValue.address.last_name);
+                 userParams.country = hashData(userDataValue.address.country);
+                 userParams.city = hashData(userDataValue.address.city);
+                 userParams.region = hashData(userDataValue.address.region);
+                 userParams.street = hashData(userDataValue.address.street);
+                 userParams.postal_code = hashData(userDataValue.address.postal_code);
                }
 
                rowSlave.user_params = userParams;

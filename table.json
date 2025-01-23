@@ -70,6 +70,35 @@
     "type":"STRING"
   },
   {
+    "mode":"REPEATED",
+    "name":"page_location_params",
+    "type":"RECORD",
+    "fields":[
+      {
+        "mode":"NULLABLE",
+        "name":"key",
+        "type":"STRING"
+      },
+      {
+        "mode":"NULLABLE",
+        "name":"value",
+        "type":"RECORD",
+        "fields":[
+          {
+            "mode":"NULLABLE",
+            "name":"string_value",
+            "type":"STRING"
+          },
+          {
+            "mode":"NULLABLE",
+            "name":"float_value",
+            "type":"FLOAT"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "mode":"NULLABLE",
     "name":"page_referrer",
     "type":"STRING"
@@ -281,37 +310,8 @@
     ]
   },
   {
-    "mode":"REPEATED",
-    "name":"query_params",
-    "type":"RECORD",
-    "fields":[
-      {
-        "mode":"NULLABLE",
-        "name":"key",
-        "type":"STRING"
-      },
-      {
-        "mode":"NULLABLE",
-        "name":"value",
-        "type":"RECORD",
-        "fields":[
-          {
-            "mode":"NULLABLE",
-            "name":"string_value",
-            "type":"STRING"
-          },
-          {
-            "mode":"NULLABLE",
-            "name":"float_value",
-            "type":"FLOAT"
-          }
-        ]
-      }
-    ]
-  },
-  {
     "mode":"NULLABLE",
-    "name":"user_params",
+    "name":"user_data",
     "type":"RECORD",
     "fields":[
       {
